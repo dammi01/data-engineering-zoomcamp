@@ -1,0 +1,16 @@
+services:
+  kestra:
+    image: kestra/kestra:latest-full
+    user: "root"
+    command: server local
+    ports:
+      - "8081:8080" # Mudei para 8081 para não conflitar com seu pgAdmin na 8080
+    environment:
+      KESTRA_CONFIGURATION: |
+        kestra:
+          server:
+            authentication:
+              enabled: false # Desativa aquela tela de registro/login irritante
+    volumes:
+      - ./kestra_data:/app/storage
+      - /var/run/docker.sock:/var/run/docker.sock # Caso queira rodar scripts dockerizados
