@@ -220,3 +220,6 @@ __marimo__/
 
 # NYC Taxi Database
 ny_taxi_db_data/
+
+# Local parquet files
+*.parquet
