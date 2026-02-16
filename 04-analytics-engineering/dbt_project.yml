@@ -1,0 +1,23 @@
+name: 'taxi_rides_ny'
+version: '1.0.0'
+config-version: 2
+
+# Este nome DEVE ser igual ao que está no seu profiles.yml
+profile: 'taxi_rides_ny'
+
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+
+target-path: "target"
+clean-targets:
+  - "target"
+  - "dbt_packages"
+
+models:
+  taxi_rides_ny:
+    staging:
+      +materialized: view
+    core:
+      +materialized: table

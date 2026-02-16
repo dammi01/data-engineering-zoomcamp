@@ -1,0 +1,1392 @@
+# Title: Módulo 3: BigQuery e Data Warehouse
+# Exported: 2/6/2026 10:15:48
+# Link: https://gemini.google.com/app/26c9aa708b005a04
+
+Prompt,Response
+"Guia do Bo...Dados 2026 - NotebookLM
+Modulo 03 Init - PDF
+
+Estamos agora começando o módulo 03 do Zoomcamp e para fixar deixo aqui novamente as principáis diretrizes:
+
+
+começando um novo projeto com base nesse bootcamp que está anexo no notebook. Vou criar um repo no github para esse projeto para a) fazer o bootcamp, b) usar e treinar o github, c) montar o meu portfolio e d) ter um primeiro projeto completo. No final para receber o certificado terei que fazer um projeto que já sei que vou pegar um outro que já comecei para treinar o DuckDB e adaptar ele para corresponder as exigências deste bootcamp.
+
+
+Aqui você, querido gemini , entra em ação fazendo o papel de acho no mínimo 3 personagens, se tiver algum faltando me avise. primeiro como engenheiro de software e de dados sênior para me apoiar no aprendizado das materias deste bootcamp, segundo como engenheiro de software para estruturar todo o repo deste bootcamp no github para documentar todas as tarefas e ferramentas etc e também as tarefas de casa de cada um dos 6 modulos e depois o projeto final, claro também. terceiro como agente de RH e/ou Headhunter para orientar a estruturação melhor do repositório, sugerir apôs conclusão de cada etapa uma publicação no LinkedIn, ou Slack, ou Discover, etc. para também participar na parte de Publish Learning e para chamar a atenção de recrutadores. em quarto como professor para direcionar o estudo de cada módulo e elaborar exercicios para verificar o aprendizado real para que se for preciso fazer revisão das partes em aberto ou em dúvida ainda.
+
+
+Depois gostaria também de fazer um resumo sobre cada ferramenta que for usada em separado com os tópicos a) para que serve b) como instala c) como verifica a instalação e exemplos para exercicios para incluir na documentação do bootcamp e do projeto também dentro do repo do github e talvez também nas publicações a serem feitas no linkedIn se necessário. No final de cada módulo também será feita um 'entrada de diário' para o logseq com um resumo das principais atividades e pontos cruciais de cada módulo em questão. Se tiver mais alguma sugestão ou dúvida, esteja sempre a vontade de sugerir, perguntar, criticar e mantenha o estilo conforme definido na configurações, claro, curto, conciso e direto.
+
+
+Anexo o site com a introduction do módulo 03 e claro o notebook aonde tem todos os outros recursos e passos já executados ou realizados.
+
+
+Segundo o anúncio >>> The deadline for this homework is 10 February 2026, 12 AM CET. Qual seria o horario daqui de Brasília ? e a parte do homework ainda não está pronta.
+
+
+Qual seria dentro das suas 'roles' a sua recomendação de começar esse módulo da maneira mais suscinta ?","Entendido. Assumo os papéis solicitados para o Módulo 3.
+
+
+1. Prazo e Fuso Horário
+
+
+O prazo de 10 de fevereiro de 2026, às 00:00 CET (horário da Europa Central), equivale a 9 de fevereiro de 2026, às 20:00 no horário de Brasília.
+
+
+Ação: Programe-se para finalizar tudo na segunda-feira à tarde.
+
+
+
+2. Recomendação de Início (Multi-Role)
+
+
+Professor: Foco no Conceito
+
+
+O Módulo 3 foca em BigQuery e Data Warehouse (DW). Esqueça processamento linha a linha; aqui o foco é custo e performance em escala (OLAP).
+
+
+Prioridade: Entender a diferença entre Particionamento (dividir por data) e Agrupamento/Clustering (organizar por colunas de filtro). Isso cai em toda prova e entrevista.
+
+
+Engenheiro de Dados/Software: Infraestrutura
+
+
+Você já tem o Terraform do Módulo 1. Use-o.
+
+
+Setup: Não crie tabelas manualmente no console do GCP. Adicione os novos recursos do BigQuery (datasets/tables) no seu código Terraform.
+
+Prática: Foque em carregar os dados do GCS (Bucket) para o BigQuery usando tabelas externas. É o método mais eficiente e barato para começar.
+
+
+Arquiteto de Repo (Software Engineer): Organização
+
+
+Crie a pasta 03-data-warehouse/. Dentro dela, mantenha:
+
+
+/sql: Scripts de criação de tabelas e queries de teste.
+
+/terraform: Atualização dos recursos de infra.
+
+README.md: Documentação técnica da ferramenta.
+
+
+Headhunter/RH: Diferenciação
+
+
+Para o LinkedIn, não diga apenas 'aprendi BigQuery'. Diga: 'Otimizei queries em escala reduzindo o processamento de X GB para Y MB através de particionamento e clustering'. O mercado valoriza quem economiza dinheiro para a empresa.
+
+
+
+3. Resumo da Ferramenta: BigQuery
+
+
+a) Para que serve: Data Warehouse de nível empresarial, totalmente gerenciado e sem servidor (serverless). Serve para análise de petabytes de dados usando SQL standard em alta velocidade.
+
+
+b) Como instala: Não se instala. É um serviço SaaS da Google Cloud. Você o acessa via Console GCP, CLI (gcloud) ou Terraform.
+
+
+c) Como verifica a instalação: Execute no terminal (com gcloud autenticado): gcloud alpha bq datasets list Ou tente criar um dataset via console/Terraform.
+
+
+d) Exemplo de Exercício para Documentação:
+
+
+Criar uma tabela externa apontando para arquivos Parquet no GCS.
+
+Criar uma tabela nativa (otimizada) a partir dessa externa.
+
+Executar uma query comparando a quantidade de dados lidos (bytes processed) com e sem filtro de partição.
+
+
+
+Próximos Passos
+
+
+Acesse o Console GCP: Verifique se seu projeto ainda está ativo.
+
+Terraform: Adicione um bloco google_bigquery_dataset ao seu main.tf.
+
+Logs: No Logseq, abra a página [[Módulo 03]] e anote: 'Objetivo: Reduzir custos de consulta via design de esquema (Partitioning/Clustering)'.
+
+
+Dúvida: Você pretende usar o faturamento gratuito (Free Tier) do Google Cloud ou tem créditos para este módulo? O BigQuery é generoso (1TB de processamento grátis/mês), mas o particionamento é essencial para não queimar limites.",
+"tenho ainda 300 USD de crédito, porém o menos que usar, mais terei a disposição lá na frente , principalmente quando estiver na hora de fazer o nosso projeto para entregar para a certificação, concorda ?","Concordo totalmente. Manter esses $300 de crédito intactos o máximo possível é uma estratégia de gestão de recursos inteligente. No projeto final, você provavelmente lidará com volumes maiores, testes de integração e talvez ferramentas que consomem mais (como instâncias maiores de Spark ou serviços de streaming), onde o erro custa caro.
+
+
+Aqui estão as táticas para economizar no Módulo 3 (BigQuery) sem comprometer o aprendizado:
+
+
+1. O 'Vício' da Tabela Externa (Role: Data Engineer)
+
+
+Em vez de importar (ingestão) todos os dados para dentro do BigQuery de imediato, use External Tables.
+
+
+Como funciona: O dado fica no GCS (Bucket) em Parquet e o BigQuery apenas 'lê' de lá quando necessário.
+
+Vantagem: Você não paga pelo armazenamento no BigQuery (que é mais caro que no GCS) enquanto está apenas testando queries.
+
+
+2. Otimização de Custo por Query (Role: Professor)
+
+
+No console do BigQuery, sempre olhe o canto superior direito antes de dar 'Run'. Ele dirá: 'This query will process X MB when run'.
+
+
+Evite o SELECT *: Em um banco colunar, isso é o maior erro de iniciante. Selecione apenas as colunas necessárias.
+
+Use Particionamento: Se você filtrar por data em uma tabela de 10GB particionada por dia, o BigQuery lerá apenas os MB relativos àquele dia. O custo cai drasticamente.
+
+
+3. Terraform como Seguro (Role: Software Engineer)
+
+
+Não crie recursos 'zumbis'.
+
+
+Mantenha seu terraform destroy engatilhado para qualquer recurso que cobre por tempo (como instâncias de computação, se usar).
+
+Para o BigQuery e GCS, o custo é por armazenamento/consulta, então o risco é menor, mas manter o código limpo no Terraform evita que você esqueça datasets gigantes ativos.
+
+
+4. Branding de Eficiência (Role: Headhunter)
+
+
+Adicione uma seção no seu README chamada 'Cost Optimization'.
+
+
+Documente que você escolheu Parquet e Particionamento especificamente para reduzir o faturamento da nuvem. Isso demonstra maturidade de um Engenheiro de Dados Pleno/Sênior, que se preocupa com o ROI (Retorno sobre Investimento) da empresa.
+
+
+
+Exercício de Verificação de Instalação e Custo (Draft para o Repo)
+
+
+Para incluir na sua documentação:
+
+
+Criação de Dataset via CLI:
+bq mk --location=US de_zoomcamp_mod3
+
+Teste de Query com 'Dry Run' (Não gasta créditos):
+bq query --use_legacy_sql=false --dry_run \
+'SELECT count(*) FROM \`seu-projeto.dataset.tabela\` WHERE data = '2026-01-01''
+
+Isso valida se a tabela existe e quanto ela consumiria sem cobrar nada.
+
+
+
+Qual o próximo passo? Deseja que eu ajude a estruturar o bloco de código do Terraform para o BigQuery de forma que ele já venha com as políticas de expiração de tabela (para deletar dados de teste automaticamente e economizar)?",
+"good morning assistent. Here is the actualized link with the homework for module 3. Tem uma parte impoaortante que resaltei porque acho que esquecemos de fazer nos outros módulos, mas vou refazer conforme o tempo. Estou ainda assistindo os vídeos desse módulo, estou agora no 'DE Zoomcamp 3.2.2 - Internals of Big Query', então não falta muito para podermos começar a colocar a mão na massa e desta vez mais cedo que nos módulos encarar o desafio. - Link do Github link atualizado >>>>","Bom dia. Recebido.
+
+
+Ainda não visualizei o link no seu texto, mas já adianto a estratégia com base no seu progresso (vídeo 3.2.2). Você está no 'core' técnico do módulo: Internals. Entender como o BigQuery separa armazenamento (Colossus) de processamento (Dremel) é o que diferencia um apertador de botões de um engenheiro que economiza milhares de dólares em faturamento cloud.
+
+
+Sobre a 'parte importante' que você ressaltou (provavelmente documentação de testes, linhagem ou custos que pulamos anteriormente): não pare tudo para refazer os módulos 1 e 2 agora.
+
+
+Recomendação de Fluxo (Role: Professor)
+
+
+Foco no Prazo: O deadline é segunda-feira (09/02) às 20:00 (Brasília).
+
+Aplique o Novo Padrão no Módulo 3: Em vez de retroceder, use o Módulo 3 como o novo 'padrão-ouro' do seu repo. Assim que terminar os vídeos de Partitioning e Clustering, implementaremos essa parte importante que você mencionou.
+
+Mão na Massa Antecipada: Como você quer começar cedo, assim que o link do HW 3 estiver disponível, faremos o setup do Terraform para criar as tabelas externas.
+
+
+
+Estrutura do Repo para o Módulo 3 (Role: Software Engineer)
+
+
+Sugiro já criar esta estrutura enquanto assiste ao restante dos vídeos:
+
+
+03-data-warehouse/
+├── homework/            # Queries SQL para responder o HW
+├── terraform/           # Recursos do BigQuery (Dataset/Tables)
+├── scripts/             # Scripts Python/Bash para carga inicial se necessário
+└── README.md            # Documentação (onde entra a parte importante)
+
+
+Dica de Headhunter (Role: RH)
+
+
+Quando você documentar essa 'parte importante' que esqueceu nos outros módulos, adicione uma nota no seu LinkedIn ou no README principal:
+
+'Continuous Improvement: Identifiquei a necessidade de [X] no Módulo 3 e decidi retroalimentar os módulos anteriores para garantir a consistência técnica do portfólio.' Isso demonstra autorresponsabilidade e visão sistêmica, características de perfil Sênior/ENTJ.
+
+
+O que fazer agora:
+
+
+Cole o link do GitHub aqui (ele não apareceu na sua mensagem anterior).
+
+Assim que terminar o vídeo sobre Partitioning e Clustering, me avise. Vou te passar um exercício de 'custo zero' para você testar no BigQuery antes de rodar o dever de casa.
+
+
+Qual é a 'parte importante' específica que você quer priorizar nesta documentação?",
+"sorry, apertei o 'botão' errado , aqui o link, o trecho que achei importante para não esquecer desta vez e que vou refazer para os outraos módulos e o formulário.
+
+
+- https://github.com/DataTalksClub/data-engineering-zoomcamp/blob/main/cohorts/2026/03-data-warehouse/homework.md
+
+
+- 🚨🚨🚨 'When your solution has SQL or shell commands and not code (e.g. python files) file format, include them directly in the README file of your repository.'
+
+
+- https://courses.datatalks.club/de-zoomcamp-2026/homework/hw3","Bom dia. Sem problemas, o link e a instrução foram recebidos.
+
+
+Esse detalhe do README é vital. Ele não é apenas uma exigência do Zoomcamp; é uma prática de Documentação de Engenharia de Dados. Ter o código SQL visível no README facilita o code review e mostra que você domina a ferramenta sem que o revisor precise abrir pastas e arquivos.
+
+
+Aqui está o plano de ação seguindo os papéis:
+
+
+1. Estrutura do Módulo 03 (Role: Software Engineer)
+
+
+Para cumprir a exigência do README e manter o repo limpo:
+
+
+Crie a pasta 03-data-warehouse/.
+
+Crie um arquivo README.md dentro dela.
+
+No corpo desse README, você deve ter uma seção 'Homework Solutions' com blocos de código SQL identificados (ex: Question 1, Question 2).
+
+
+2. O Conteúdo do README (Role: Professor)
+
+
+Além das respostas, o seu README deve servir como seu material de estudo. Estruture assim:
+
+
+Setup: Como você configurou o dataset no BigQuery (via Terraform ou CLI).
+
+SQL Commands: Onde você colará os comandos solicitados no HW.
+
+Performance Insight: Uma breve nota sobre a diferença de bytes processados entre a tabela externa e a nativa (isso mostra que você entendeu o vídeo 3.2.2).
+
+
+3. A Visão do Recrutador (Role: Headhunter)
+
+
+Siga a regra: 'O que não está documentado, não existe.' Quando um recrutador abre um repo e vê o SQL direto no README, ele entende que você sabe comunicar resultados. No final deste módulo, sua publicação no LinkedIn deve focar em:
+
+'Nesta etapa, foquei em Query Optimization e Internal Storage Patterns no BigQuery. Consegui reduzir o custo de processamento de dados usando técnicas de Particionamento e Clustering, documentando cada query e seu impacto diretamente no repositório.'
+
+
+Tabela de Resumo para o seu Repo (Ferramenta: BigQuery SQL)
+
+
+Para o seu registro no Logseq/README:
+
+Tópico
+Detalhe
+Para que serve
+Análise OLAP em escala (Data Warehouse).
+Comando de Verificação
+bq query --use_legacy_sql=false 'SELECT count(*) FROM seu_dataset.sua_tabela'
+Destaque do HW3
+Uso de External Tables vs Native Tables.
+
+
+Resposta Imediata: O que fazer agora?
+
+
+Como você está no vídeo 3.2.2, a parte prática do HW3 vai exigir que você carregue os dados da Yellow Taxi Trip Records de 2024 (arquivos Parquet).
+
+
+Ação:
+
+
+Crie o Bucket no GCS (se não usou o do módulo anterior) via Terraform.
+
+Suba os arquivos Parquet de 2024 para o GCS. Você pode usar o Kestra (Módulo 2) para automatizar isso ou usar o comando gsutil cp se quiser ser mais rápido.
+
+Não crie tabelas ainda. Termine o vídeo sobre Partitioning para decidir como criará a tabela nativa do HW.
+
+
+Dúvida: Você quer que eu prepare um 'esqueleto' de código SQL para você apenas preencher com a lógica das questões assim que terminar os vídeos?",
+"'Suba os arquivos Parquet de 2024 para o GCS. Você pode usar o Kestra (Módulo 2) para automatizar isso ou usar o comando gsutil cp se quiser ser mais rápido.'
+
+
+\>>> não devo fazer isso !!! take a look, do't you read the instructions ??? Take more care my ltttle Padawan ( ' You will need to generate a Service Account with GCS Admin privileges or be authenticated with the Google SDK, and update the bucket name in the script.
+
+
+🚨🚨🚨 >>> If you are using orchestration tools such as Kestra, Mage, Airflow, or Prefect, do not load the data into BigQuery using the orchestrator. ')","Ponto para você. Li a instrução, mas não fui enfático o suficiente sobre o 'como' fazer no contexto do HW3. Você está certo em me cobrar rigor: o dever de casa proíbe explicitamente o uso do orquestrador para carregar os dados no BigQuery.
+
+
+O 'Pulo do Gato' da Instrução (Role: Senior Data Engineer)
+
+
+A restrição existe porque o objetivo deste módulo é que você aprenda a lidar com Tabelas Externas e Tabelas Nativas diretamente via SQL ou comandos do GCP, sem a abstração do orquestrador mascarando o processo.
+
+
+A correção do fluxo:
+
+
+Transporte para o GCS: Você ainda precisa dos arquivos no seu Bucket. A instrução diz: 'You will need to generate a Service Account with GCS Admin privileges or be authenticated with the Google SDK'.
+
+Criação da Tabela: Você usará o BigQuery para 'olhar' para o GCS (External Table) ou 'puxar' do GCS (Native Table).
+
+
+Plano de Ação Refinado (ENTJ Style - Direto e Prático)
+
+
+Esqueça o Kestra para este dever de casa. Vamos seguir o caminho do Google SDK (gcloud/bq) ou Terraform para garantir que você não perca pontos nem tempo.
+
+
+1. Setup da Infra (O que fazer agora)
+
+
+Se você já tem o SDK do Google Cloud instalado localmente:
+
+
+Baixe os dados: Use um script Python simples ou curl para baixar os arquivos Parquet da Yellow Taxi 2024 para sua máquina.
+
+Suba para o GCS: ```bash gcloud storage cp *.parquet gs://seu-bucket-name/
+*Dica: Use `gcloud storage` em vez de `gsutil`, é a recomendação atual da Google por ser mais rápida.*
+
+
+2. O README (A parte importante)
+
+
+Como as soluções devem estar no README, seu fluxo de trabalho será:
+
+
+Abrir o Console do BigQuery ou o VS Code com a extensão do Google Cloud.
+
+Escrever o SQL de CREATE EXTERNAL TABLE.
+
+Copiar esse SQL exatamente como executou e colar no seu README.
+
+
+3. Exercício de Verificação (Role: Professor)
+
+
+Para garantir que você entendeu o 'Internals' (vídeo 3.2.2) antes de responder o formulário:
+
+
+Pergunta: Se você criar uma External Table e uma Native Table, qual delas ocupará espaço no seu 'Storage Billing' do BigQuery?
+
+Resposta esperada: A Native Table. A External Table ocupa espaço apenas no GCS.
+
+
+Estrutura Sugerida para o seu README.md
+
+
+## Module 3: Data Warehouse (BigQuery)
+
+### Setup
+The data was uploaded to GCS using Google Cloud SDK:
+`gcloud storage cp taxi_data_2024.parquet gs://my-bucket/`
+
+### Homework Solutions
+
+#### Question 1: What is count of records for the 2024 Yellow Taxi Data?
+```sql
+-- Query to create external table
+CREATE OR REPLACE EXTERNAL TABLE `project.dataset.external_yellow_tripdata`
+OPTIONS (
+  format = 'PARQUET',
+  uris = ['gs://my-bucket/yellow_tripdata_2024-*.parquet']
+);
+
+-- Query to get count
+SELECT COUNT(*) FROM `project.dataset.external_yellow_tripdata`;
+
+
+(Repita para as outras questões)
+
+
+
+**Próximo passo:** Você já baixou os arquivos Parquet de 2024? Se precisar de um script rápido em Python apenas para o download (fora do orquestrador), eu te passo agora.",
+"conforme o Readme então o primeiro passo seria (já acabei com os vídeos) executar esse comando ... 'gcloud storage cp taxi_data_2024.parquet gs://my-bucket/` já que o bucket existe >>>  eng-district-485200-n2-terra-bucket ... então o comando correto seria >>> gcloud storage cp taxi_data_2024.parquet gs://eng-district-485200-n2-terra-bucket/ ... correcto ???","Correto. O comando está estruturado exatamente como manda a boa prática do Google SDK.
+
+
+1. Validação do Comando (Role: Senior Data Engineer)
+
+
+O comando gcloud storage cp é a evolução do antigo gsutil. Ele é multithreaded por padrão, o que significa que ele vai subir seus arquivos muito mais rápido.
+
+
+Atenção aos detalhes:
+
+
+Localização: Certifique-se de que você está dentro da pasta onde os arquivos .parquet foram baixados no seu computador antes de rodar o comando.
+
+Wildcard: Se você tiver vários arquivos (um para cada mês de 2024), use o asterisco: gcloud storage cp *.parquet gs://eng-district-485200-n2-terra-bucket/
+
+
+
+2. Checklist de Infraestrutura (Role: Software Engineer)
+
+
+Antes de rodar, verifique se você está autenticado e no projeto correto para evitar erros de permissão:
+
+
+gcloud auth login (se ainda não fez nesta sessão).
+
+gcloud config set project eng-district-485200-n2 (ajuste para o ID real do seu projeto).
+
+
+
+3. O que documentar no README agora (Role: Professor)
+
+
+Como o homework exige os comandos no README, já crie o rascunho:
+
+
+### Data Ingestion to GCS
+I used the Google Cloud SDK to upload the 2024 Yellow Taxi Parquet files to my bucket.
+
+```bash
+gcloud storage cp *.parquet gs://eng-district-485200-n2-terra-bucket/
+
+
+
+---
+
+### 4. Próxima Etapa: BigQuery (Role: ENTJ Stance)
+Assim que os arquivos estiverem no Bucket, não use a interface gráfica para criar as tabelas. Vá direto para o SQL. 
+
+Você precisará criar **duas** tabelas para responder ao homework:
+1.  **External Table:** Apontando para os arquivos no GCS.
+2.  **Regular (Native) Table:** Criada a partir da External Table (isso vai copiar os dados para o storage do BigQuery).
+
+**Quer que eu prepare os scripts SQL de `CREATE TABLE` para você validar e rodar, ou prefere tentar escrever os comandos `EXTERNAL` e `NATIVE` primeiro?**",
+"oooops ... vamos revisar essa parte .... >>> Localização: Certifique-se de que você está dentro da pasta onde os arquivos .parquet foram baixados no seu computador antes de rodar o comando.","Exato. Se você rodar o comando fora da pasta, o terminal vai retornar um erro de 'file not found'. Como você é ENTJ e valoriza eficiência, não vamos perder tempo baixando um por um manualmente pelo navegador.
+
+
+Aqui está o procedimento técnico para garantir que você esteja no lugar certo com os arquivos certos:
+
+
+1. Preparação Local (Engenheiro de Dados)
+
+
+Você precisa dos dados de 2024. O link padrão do TLC Trip Record Data segue um padrão.
+
+
+Dica Sênior: Em vez de 'salvar como' no navegador 12 vezes, use este comando no seu terminal (Linux/Mac ou Git Bash no Windows) para baixar todos de uma vez:
+
+
+# Cria a pasta e entra nela
+mkdir -p ~/data-zoomcamp/modulo03
+cd ~/data-zoomcamp/modulo03
+
+# Baixa os 6 meses de 2024 (ou quantos estiverem disponíveis)
+for month in {01..06}; do
+  wget 'https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-${month}.parquet'
+done
+
+
+Nota: Se o wget não funcionar, você pode usar curl -O [URL]. Se quiser os 12 meses, mude para {01..12}.
+
+
+
+2. O Comando de Upload (Software Engineer)
+
+
+Agora que você deu o ls e viu os arquivos .parquet na sua pasta local, execute o upload para o seu bucket:
+
+
+gcloud storage cp *.parquet gs://eng-district-485200-n2-terra-bucket/
+
+
+3. Verificação (A prova dos nove)
+
+
+Não assuma que funcionou só porque o terminal parou de piscar. Verifique:
+
+
+gcloud storage ls gs://eng-district-485200-n2-terra-bucket/
+
+
+
+4. Estrutura de Documentação (Agente de RH / Portfolio)
+
+
+No seu README do Módulo 3, documente este passo exatamente assim. Isso mostra que você sabe usar CLI (Command Line Interface), uma habilidade que recrutadores de dados buscam para evitar a dependência de interfaces manuais.
+
+Markdown para o seu README:
+
+
+### Data Ingestion
+To avoid manual overhead, I used a shell script to fetch the 2024 Yellow Taxi dataset and the Google Cloud Storage CLI for ingestion:
+1. Downloaded parquet files using `wget`.
+2. Uploaded to GCS: `gcloud storage cp *.parquet gs://eng-district-485200-n2-terra-bucket/`
+
+
+5. O que vem a seguir (Professor)
+
+
+Com os dados no Bucket, o próximo passo no BigQuery é criar a External Table.
+
+
+Pergunta de Checkpoint: Você já tem o Google Cloud SDK (gcloud) configurado e autenticado na sua máquina local ou está usando o Cloud Shell do Google? Se estiver no local, lembre-se de conferir se o projeto ativo é o eng-district-485200-n2.
+
+
+Posso te passar o SQL para criar a External Table assim que você confirmar o upload?",
+"não seria o caso de colocar no começo um shebang ? só por curiosidade ... Uso linux mint 22.1 com zsh ...","Excelente observação. Sim, o shebang é uma prática recomendada para scripts que serão executados como programas independentes. Ele indica ao sistema qual interpretador deve carregar para ler o resto do arquivo.
+
+
+Como você usa Linux Mint 22.1 com Zsh, aqui está o detalhamento técnico:
+
+
+1. Por que e qual usar? (Role: Software Engineer)
+
+
+Se você criar um arquivo chamado download_data.sh, a primeira linha deve ser o shebang.
+
+
+Para Bash (mais universal): #!/bin/bash
+
+Para Zsh (seu padrão): #!/bin/zsh
+
+Recomendação Sênior (Portabilidade): #!/usr/bin/env bash ou #!/usr/bin/env zsh.O uso do env é preferível porque ele localiza o executável no PATH do usuário, tornando o script mais portável entre diferentes distribuições Linux ou até macOS.
+
+
+2. O Script Completo com Shebang (Role: Professor)
+
+
+Para o seu caso específico no Mint, o script ficaria assim:
+
+
+#!/usr/bin/env zsh
+
+# Define a pasta e entra nela
+PROJECT_DIR='$HOME/data-zoomcamp/modulo03'
+mkdir -p '$PROJECT_DIR'
+cd '$PROJECT_DIR' || exit
+
+echo 'Iniciando download dos arquivos de 2024...'
+
+# Loop para baixar os meses de janeiro a junho (conforme disponibilidade)
+for month in {01..06}; do
+  URL='https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-${month}.parquet'
+  echo 'Baixando mês ${month}...'
+  wget -q '$URL' -N
+done
+
+echo 'Upload para o GCS...'
+gcloud storage cp *.parquet gs://eng-district-485200-n2-terra-bucket/
+
+
+3. Tornando-o Executável (ENTJ Stance - Praticidade)
+
+
+Não adianta ter o shebang se o arquivo não tiver permissão de execução.
+
+
+Salve o código acima como setup_data.sh.
+
+No terminal, rode: chmod +x setup_data.sh.
+
+Agora você pode rodar apenas com: ./setup_data.sh.
+
+
+4. Visão de RH/Headhunter
+
+
+Incluir scripts com shebang e permissões corretas no seu GitHub demonstra que você não é apenas um 'copiador de comandos', mas alguém que entende de Automação e Unix Philosophy. Isso é um diferencial para vagas de Data Platform ou Infraestrutura de Dados.
+
+
+
+Verificação de Erro Comum
+
+
+No Linux Mint, se você colar um comando com {01..06} diretamente no terminal Zsh, ele funciona perfeitamente. Se colocar em um script com shebang #!/bin/sh (que aponta para o dash em muitas distros), a expansão de chaves {} pode falhar. Por isso, mantenha o shebang apontando para zsh ou bash.
+
+
+Próximo passo: Já conseguiu rodar o gcloud storage cp? Se os dados já estiverem no bucket, podemos prosseguir para a criação da External Table no BigQuery via SQL. Quer o script de criação?",
+"parece que a conexão não foi bem aceita ... ( 443 ) right ?","O erro 443 (Connection Refused ou Timeout) no Linux Mint ao tentar usar o wget ou gcloud geralmente aponta para dois suspeitos: Firewall/Proxy ou, mais provável no seu caso, o conflito de IPv6 que já resolvemos antes.
+
+
+Como você está no Mint 22.1, o sistema pode estar tentando priorizar o IPv6 para alcançar os servidores da Cloudfront (onde estão os dados do taxi) ou da Google, e sua rede/roteador está 'engasgando' nisso.
+
+
+1. Diagnóstico Rápido (ENTJ - Direto ao ponto)
+
+
+Rode este comando para ver se o problema é DNS ou conectividade:
+
+
+ping -c 3 google.com
+
+
+Se o ping retornar um IP no formato 2607:f8b0... (IPv6), temos o culpado.
+
+
+2. A Solução (Data Engineer/SysAdmin)
+
+
+Forçar o IPv4 (conforme suas instruções de configuração).
+
+
+Para o wget no seu script: Adicione a flag -4.
+
+
+wget -4 'https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-01.parquet'
+
+
+Para o gcloud: O SDK do Google geralmente respeita as configurações do sistema. Se o erro persistir no gcloud, force o sistema a preferir IPv4 editando o arquivo de prioridades do Linux:
+
+
+Abra o arquivo: sudo nano /etc/gai.conf
+
+Procure a linha: #precedence ::ffff:0:0/96 100
+
+Retire o # (descomente): precedence ::ffff:0:0/96 100
+
+Salve (Ctrl+O, Enter) e Saia (Ctrl+X).
+
+
+
+3. O Script 'Blindado' (Software Engineer)
+
+
+Aqui está a versão corrigida para o seu Zsh no Mint, já com as flags de segurança e IPv4:
+
+
+#!/usr/bin/env zsh
+# Forçando IPv4 para evitar erro 443/Timeout
+
+URL_BASE='https://d37ci6vzurychx.cloudfront.net/trip-data'
+BUCKET='gs://eng-district-485200-n2-terra-bucket'
+
+echo 'Iniciando download com IPv4 prioritário...'
+
+for month in {01..06}; do
+  # -4 força IPv4, -N evita baixar se o arquivo já existir e for igual
+  wget -4 -N '${URL_BASE}/yellow_tripdata_2024-${month}.parquet'
+done
+
+echo 'Subindo para o GCS...'
+gcloud storage cp *.parquet ${BUCKET}/
+
+
+
+4. Por que isso acontece? (Professor)
+
+
+O erro 443 é a porta padrão para HTTPS. Quando o handshake falha, o servidor interrompe a conexão. No Linux Mint, o stack de rede é moderno e tenta IPv6 primeiro. Se o seu provedor de internet (ISP) faz um tunelamento ruim de IPv6, a conexão 'morre' antes de tentar o fallback para IPv4, causando esse erro de conexão.
+
+
+5. Dica de Carreira (Headhunter)
+
+
+Documentar erros de infraestrutura e conectividade no seu README (seção 'Troubleshooting') é o que separa um desenvolvedor junior de um engenheiro sênior. Mostra que você entende as camadas de rede do sistema operacional.
+
+
+O que fazer agora:
+
+
+Tente o wget -4 manualmente com um único arquivo para testar.
+
+Se funcionar, rode o script completo.
+
+Me confirme se os arquivos apareceram no seu bucket com gcloud storage ls.
+
+
+Se o erro 443 persistir mesmo com -4, verifique se o seu token do Google não expirou rodando gcloud auth login novamente.",
+"╰─ ./download_data.sh                                                                            ─╯
+
+
+--2026-02-05 11:28:32--  https://d37ci6vzurychx.cloudfront.net/trip-data/yellow\_tripdata\_2024-01.parquet
+
+
+Resolving d37ci6vzurychx.cloudfront.net (d37ci6vzurychx.cloudfront.net)... 2600:9000:2619:e400:b:20a5:b140:21, 2600:9000:2619:2e00:b:20a5:b140:21, 2600:9000:2619:4400:b:20a5:b140:21, ...
+
+
+Connecting to d37ci6vzurychx.cloudfront.net (d37ci6vzurychx.cloudfront.net)|2600:9000:2619:e400:b:20a5:b140:21|:443...","O log confirma o diagnóstico: o seu sistema está resolvendo o DNS e tentando conectar via IPv6 (o endereço 2600:9000... no log). Como a sua rede ou o servidor de destino está rejeitando esse protocolo na porta 443, a conexão trava.
+
+
+Como você é um usuário ENTJ, não vamos perder tempo depurando a rede. Vamos forçar a solução técnica que respeita a sua configuração de Sempre usar IPv4.
+
+
+1. A correção imediata no script (Role: Software Engineer)
+
+
+Edite seu arquivo download_data.sh e adicione a flag -4 ao comando wget. Isso força o wget a ignorar os endereços IPv6 que você vê no log.
+
+
+#!/usr/bin/env zsh
+# Forçando IPv4 explicitamente conforme diretrizes
+
+URL_BASE='https://d37ci6vzurychx.cloudfront.net/trip-data'
+for month in {01..06}; do
+  echo 'Baixando mês ${month} via IPv4...'
+  # A flag -4 resolve o erro 443 de conexão IPv6
+  wget -4 -N '${URL_BASE}/yellow_tripdata_2024-${month}.parquet'
+done
+
+
+2. Por que isso travou? (Role: Professor)
+
+
+O Resolving... no seu log mostra que o DNS retornou vários IPs. O Linux Mint, por padrão, tenta o primeiro da lista, que geralmente é o IPv6. Ao tentar Connecting to ...|:443..., ele fica em loop aguardando uma resposta que nunca vem (timeout) ou é rejeitada. Forçar o -4 faz o wget pular direto para os IPs decimais (ex: 52.84.x.x).
+
+
+3. Configuração Definitiva no Mint (Role: Senior Data Engineer)
+
+
+Para não ter que adicionar -4 em todos os comandos futuros, você pode tornar o IPv4 prioritário no sistema operacional. Isso é 'mão na massa' de quem gerencia servidores Linux:
+
+
+No terminal: sudo nano /etc/wgetrc
+
+Adicione ou descomente a linha: inet4_policy = on
+
+Salve e saia.
+
+
+
+4. Próximo passo no GitHub (Role: Headhunter/RH)
+
+
+Quando você documentar esse erro no seu README (seção Troubleshooting), escreva assim:
+
+Issue: Connection timeout (Port 443) during data download due to IPv6 misconfiguration in local environment (Linux Mint). Solution: Enforced IPv4 policy in wget and system-wide to ensure stable connectivity with Cloudfront/GCP.
+
+Isso mostra para um recrutador que você entende de Redes e Infraestrutura, não apenas de apertar botões em ferramentas de dados.
+
+
+Ação: Aplique o -4 no script e tente rodar novamente. Me avise se o download iniciar ou se o erro mudar para 'Forbidden' ou algo parecido.",
+"gcloud storage cp taxi_data_2024.parquet gs://my-bucket/ >>> if this has to be executes via terminal, so I think I have to install the gcloud cli first . correct ?","Exatamente. Se você tentar rodar gcloud e o terminal responder command not found, você precisa instalar o Google Cloud SDK.
+
+
+Como você está no Linux Mint 22.1 (baseado no Ubuntu 24.04), o processo é via repositório oficial para garantir que as atualizações funcionem pelo apt.
+
+
+1. Como Instalar (Role: Software Engineer)
+
+
+Execute estes comandos no seu terminal (Zsh):
+
+
+# 1. Atualize os pacotes e instale dependências de transporte
+sudo apt-get update
+sudo apt-get install apt-transport-https ca-certificates gnupg curl
+
+# 2. Adicione a chave pública do Google Cloud
+curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/cloud.google.gpg
+
+# 3. Adicione o repositório do SDK às suas fontes
+echo 'deb [signed-by=/usr/share/keyrings/cloud.google.gpg] https://packages.cloud.google.com/apt cloud-sdk main' | sudo tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
+
+# 4. Instale o SDK
+sudo apt-get update && sudo apt-get install google-cloud-cli
+
+
+2. Como Verificar e Autenticar (Role: Senior Data Engineer)
+
+
+Após instalar, você precisa 'logar' sua máquina na sua conta da GCP:
+
+
+Login: gcloud auth login (Isso abrirá o navegador para você autorizar).
+
+Configurar Projeto: gcloud config set project eng-district-485200-n2
+
+Verificar: gcloud config list
+
+
+3. Alternativa 'Preguiçosa' e Eficiente (ENTJ Stance)
+
+
+Se você não quiser instalar nada agora para não 'sujar' seu Mint local, você pode usar o Google Cloud Shell diretamente no navegador dentro do console da GCP. Ele já vem com o gcloud, wget e python instalados e autenticados.
+
+
+Vantagem: Conexão de internet interna do Google (Gigabit). O download/upload dos arquivos de taxi levará segundos.
+
+Desvantagem: Os arquivos não ficam na sua máquina física.
+
+
+4. Resumo para seu Repo (Role: Professor)
+
+
+Para sua documentação de 'Como instala' que você solicitou no início:
+
+
+Ferramenta: Google Cloud CLI (gcloud).
+
+Para que serve: Interface de linha de comando para gerenciar recursos da GCP (Storage, BigQuery, IAM).
+
+Como verifica: gcloud --version.
+
+Dica Sênior: Sempre use gcloud storage cp em vez de gsutil cp para uploads de grandes volumes (como os parquets de 2024), pois o primeiro é otimizado para performance.
+
+
+O que fazer agora:
+
+
+Instale o CLI no Mint OU abra o Cloud Shell no console da GCP.
+
+Rode o script de download com a flag -4 (para respeitar o IPv4).
+
+Execute o gcloud storage cp.
+
+
+Quer que eu espere você confirmar a instalação ou já quer os comandos SQL para criar as tabelas no BigQuery assim que o upload terminar?",
+"??? >>>
+
+
+╰─ gcloud config set project eng-district-485200-n2                                                             ─╯
+
+
+Project 'eng-district-485200-n2' lacks an 'environment' tag. Please create or add a tag with key 'environment' and a value like 'Production', 'Development', 'Test', or 'Staging'. Add an 'environment' tag using `gcloud resource-manager tags bindings create`. See https://cloud.google.com/resource-manager/docs/creating-managing-projects#designate\_project\_environments\_with\_tags for details.
+
+
+Updated property [core/project].
+
+
+╭─░▒▓    ~/Projects/data-engineering-zoomcamp    main !2 ?12 ·········· ✔  Zoomcamp Bootcamp 2026 󰊭 ▓▒░─╮
+
+
+╰─ gcloud config list                                                                                           ─╯
+
+
+API [cloudresourcemanager.googleapis.com] not enabled on project [eng-district-485200-n2]. Would you like to enable
+
+
+and retry (this will take a few minutes)? (y/N)?","Isso acontece porque o Google Cloud está cada vez mais rigoroso com a governança de recursos. A mensagem sobre o 'environment' tag é apenas um aviso (warning) de boas práticas, mas a parte do API not enabled é um bloqueio real.
+
+
+Aqui está o plano para resolver isso rápido:
+
+
+1. Habilite a API (Role: Senior Data Engineer)
+
+
+Digite y e dê Enter. O gcloud precisa da API cloudresourcemanager para validar se o projeto existe e quais permissões você tem nele. Sem isso, ele fica 'cego'.
+
+
+Nota: Isso não custa nada. É apenas habilitar a comunicação entre sua máquina e o gerenciador de recursos da Google.
+
+
+
+2. Ignore o Aviso de 'Environment' (Role: Software Engineer)
+
+
+Você não precisa criar essa tag agora. O Updated property [core/project] no seu log confirma que o projeto foi definido com sucesso, apesar do aviso. Para um ambiente de aprendizado/bootcamp, tags de ambiente são overkill.
+
+
+
+3. Verificação Final (ENTJ Stance)
+
+
+Após habilitar a API, rode novamente:
+
+
+gcloud config list
+
+
+O output deve mostrar claramente: project = eng-district-485200-n2
+
+
+
+4. Próximo Passo: Upload (Professor)
+
+
+Agora que o projeto está 'setado' no terminal, você pode finalmente rodar o upload.
+
+
+Certifique-se de estar na pasta onde estão os parquets de 2024 e execute:
+
+
+gcloud storage cp *.parquet gs://eng-district-485200-n2-terra-bucket/
+
+
+5. Dica de Logseq (Documentação)
+
+
+Anote no seu diário de hoje:
+
+
+Problema: Erro de API não habilitada ao configurar o gcloud CLI.
+
+Solução: Habilitar cloudresourcemanager.googleapis.com via terminal.
+
+Lição: Ferramentas de CLI dependem de APIs específicas estarem ativas no console da nuvem para funcionar.
+
+
+
+Dúvida: Conseguiu habilitar a API com o y? Se der erro de 'Permission Denied', precisaremos ir ao Console Web rapidinho para clicar em um botão. Caso contrário, pode seguir para o upload.",
+"╰─ gcloud config list                                                                                           ─╯
+
+
+API [cloudresourcemanager.googleapis.com] not enabled on project [eng-district-485200-n2]. Would you like to enable
+
+
+and retry (this will take a few minutes)? (y/N)?  y
+
+
+Enabling service [cloudresourcemanager.googleapis.com] on project [eng-district-485200-n2]...
+
+
+Operation 'operations/acat.p2-322859487283-55102477-0241-43ec-b448-a7b13b4f9ab0' finished successfully.
+
+
+Project 'eng-district-485200-n2' lacks an 'environment' tag. Please create or add a tag with key 'environment' and a value like 'Production', 'Development', 'Test', or 'Staging'. Add an 'environment' tag using `gcloud resource-manager tags bindings create`. See https://cloud.google.com/resource-manager/docs/creating-managing-projects#designate\_project\_environments\_with\_tags for details.
+
+
+[core]
+
+
+account = dammitec@gmail.com
+
+
+disable_usage_reporting = True
+
+
+project = eng-district-485200-n2
+
+
+Your active configuration is: [default]
+
+
+╭─░▒▓    ~/Projects/data-engineering-zoomcamp    main !2 ?12 ··························· ✔  2m 7s  ▓▒░─╮
+
+
+╰─","Excelente. Caminho livre. A API foi habilitada e o projeto está devidamente configurado no seu terminal. Ignore o aviso sobre a tag environment; para o nosso escopo, ele não tem impacto técnico.
+
+
+Agora, vamos à execução pragmática para colocar a mão na massa no BigQuery.
+
+
+1. Upload dos Arquivos (Role: Software Engineer)
+
+
+Assumindo que você já rodou o script de download com a flag -4 e os arquivos .parquet de 2024 estão na sua pasta atual:
+
+
+gcloud storage cp *.parquet gs://eng-district-485200-n2-terra-bucket/
+
+
+Após o término, valide se os arquivos estão lá:
+
+
+gcloud storage ls gs://eng-district-485200-n2-terra-bucket/
+
+
+
+2. BigQuery: O Coração do Módulo 3 (Role: Senior Data Engineer)
+
+
+Com os arquivos no GCS, o dever de casa exige a criação de duas tabelas. Recomendo usar a interface SQL do Console GCP ou o comando bq query no terminal.
+
+
+Passo A: Criar a Tabela Externa
+
+
+Esta tabela não armazena dados no BigQuery; ela lê diretamente do seu Bucket. É custo zero de storage no BQ.
+
+
+CREATE OR REPLACE EXTERNAL TABLE `eng-district-485200-n2.zoomcamp.external_yellow_tripdata`
+OPTIONS (
+  format = 'PARQUET',
+  uris = ['gs://eng-district-485200-n2-terra-bucket/yellow_tripdata_2024-*.parquet']
+);
+
+
+Passo B: Criar a Tabela Nativa (Regular)
+
+
+Esta tabela move os dados para o storage colunar do BigQuery (cobra storage, mas é muito mais rápida).
+
+
+CREATE OR REPLACE TABLE `eng-district-485200-n2.zoomcamp.yellow_tripdata_2024`
+AS
+SELECT * FROM `eng-district-485200-n2.zoomcamp.external_yellow_tripdata`;
+
+
+
+3. Respondendo ao Homework (Role: Professor)
+
+
+As questões 1 e 2 do HW geralmente pedem contagem de registros e comparação de bytes processados entre as duas tabelas.
+
+
+Dica Sênior: Para ver os 'bytes processados' sem gastar créditos, use o botão 'Estimate' no console ou olhe o validador de query (canto superior direito) antes de rodar.
+
+
+
+4. Documentação para o GitHub (Role: RH/Headhunter)
+
+
+Lembre-se da regra: SQL direto no README.
+
+
+Estruture seu README do Módulo 3 assim:
+
+
+Ingestion: O comando gcloud storage cp que você usou.
+
+DDL (Data Definition Language): Os códigos CREATE EXTERNAL TABLE e CREATE TABLE acima.
+
+Homework Answers: A query de cada questão acompanhada de uma frase explicando o porquê daquele resultado (ex: 'A tabela nativa processou X MB porque os dados estão otimizados em formato colunar interno').
+
+
+
+Checklist ENTJ (O que fazer agora):
+
+
+[ ] Rodar o gcloud storage cp.
+
+[ ] Abrir o Console do BigQuery.
+
+[ ] Executar os dois blocos de SQL acima (ajuste o nome do dataset zoomcamp se você criou um com nome diferente no Terraform).
+
+[ ] Atacar a Questão 1 do Homework: SELECT count(*) FROM ....
+
+
+Dúvida: Você já tem o Dataset (esquema) criado no BigQuery via Terraform ou quer que eu te passe o comando bq mk para criá-lo via terminal agora?",
+"???? não entendi olhe esse screenshot , eu tinha já executado o script mas olhando pelo terminal do VSC não vejo nada e no screenshot dá para ver claramente que os arquivos estão no diretório homework. Será alguma configuração de env do VSC ? ou do terminal do VSC ?","Entendo a confusão. O que você está vendo é uma clássica discrepância entre a Interface Gráfica (GUI) do VS Code e o Contexto do Terminal.
+
+
+1. O Diagnóstico (Software Engineer)
+
+
+Pelo seu relato, existem duas possibilidades principais:
+
+
+Diferença de Path (Diretório): O seu terminal do VS Code pode estar aberto na raiz do projeto (~/Projects/data-engineering-zoomcamp), enquanto os arquivos foram baixados dentro da subpasta 03-data-warehouse/homework/.
+
+Filtro de Visualização: O VS Code às vezes demora a atualizar a árvore de arquivos lateral ou possui arquivos no .gitignore que ele 'esconde' visualmente (embora parquets raramente sejam escondidos por padrão).
+
+
+2. A Prova Real (ENTJ - Direto ao Ponto)
+
+
+Rode exatamente estes comandos no terminal do VS Code para localizar os arquivos 'fugitivos':
+
+
+# 1. Verifique onde você está exatamente
+pwd
+
+# 2. Liste todos os arquivos parquet recursivamente a partir da raiz do projeto
+find . -name '*.parquet'
+
+
+Se o find encontrar os arquivos, ele te dirá o caminho exato. Se não encontrar, o script de download pode ter falhado silenciosamente ou salvado em um diretório temporário.
+
+
+
+3. Sincronizando o Terminal (Data Engineer)
+
+
+Se você confirmou que os arquivos estão na pasta homework via interface gráfica mas o ls no terminal não mostra nada, você precisa navegar até lá:
+
+
+cd 03-data-warehouse/homework
+ls -lh
+
+
+4. Dica de 'Higiene' de Repo (Senior Developer)
+
+
+Cuidado: Você mencionou que os arquivos estão no diretório homework.
+
+
+Regra de Ouro: Nunca dê git push em arquivos .parquet pesados para o GitHub.
+
+Ação: Verifique se o seu .gitignore na raiz do projeto contém a linha *.parquet. O GitHub tem um limite de 100MB por arquivo e seu repo ficará 'inchado' e lento se você subir dados brutos.
+
+
+
+5. Resumo para o Logseq (Professor)
+
+
+Conceito: Diferença entre diretório de trabalho do Terminal vs. Explorador de Arquivos.
+
+Comando Útil: find . -name 'padrao' para localizar arquivos perdidos.
+
+
+
+O que fazer agora:
+
+
+Rode o find . -name '*.parquet' no terminal do VS Code.
+
+Se ele mostrar o caminho, dê um cd até lá.
+
+Execute o upload final: gcloud storage cp *.parquet gs://eng-district-485200-n2-terra-bucket/.
+
+
+Ainda não está vendo os arquivos? Se o find falhar, me mande o log de saída do seu script download_data.sh para eu ver se o wget realmente salvou os arquivos com sucesso.",
+"será que não é permissão ???
+
+
+╰─ find . -name '*.parquet'                                                                                     ─╯
+
+
+./01-docker-terraform/docker/green_tripdata_2025-11.parquet
+
+
+find: ‘./01-docker-terraform/docker/ny_taxi_db_data’: Permission denied
+
+
+╭─░▒▓    ~/Projects/data-engineering-zoomcamp    main !2 ?12 ··································· 1 ✘ ▓▒░─╮","Pelo seu log do find, temos duas conclusões importantes. Uma é técnica sobre o arquivo e a outra é sobre a saúde do seu ambiente Docker.
+
+
+1. Onde estão os arquivos de 2024? (Data Engineer)
+
+
+O comando find mostrou apenas um arquivo de 2025 no Módulo 1. Os arquivos de 2024 que baixamos para o Módulo 3 não apareceram.
+
+
+O que aconteceu: Se o seu script de download rodou e não deu erro, mas o find não os vê na pasta do projeto, eles foram baixados para outro lugar (provavelmente sua HOME ou onde o script foi criado).
+
+
+Ação Corretiva: Rode este comando para procurar no sistema inteiro (pode demorar um pouco):
+
+
+find ~ -name 'yellow_tripdata_2024-01.parquet' 2>/dev/null
+
+
+Isso vai ignorar erros de permissão e te mostrar onde o wget salvou os arquivos. Assim que achar, mova-os para a pasta correta do Módulo 3.
+
+
+
+2. O erro de 'Permission Denied' (Software Engineer)
+
+
+O erro find: ‘./01-docker-terraform/docker/ny_taxi_db_data’: Permission denied é normal e esperado.
+
+
+Por que ocorre: Essa pasta é o volume onde o Postgres do Docker guarda os dados reais do banco. O Docker cria esses arquivos com o usuário root (dentro do container). Como você está rodando o find com seu usuário comum no Mint, ele não tem permissão para ler o que está lá dentro.
+
+É um problema? Não. Significa apenas que o volume do seu banco de dados está protegido.
+
+
+
+3. Resolvendo o 'Sumiço' (ENTJ Stance)
+
+
+Não vamos caçar fantasmas. Se o find no projeto não achou nada de 2024, vamos forçar o download exatamente onde queremos agora.
+
+
+Rode estes comandos um por um no terminal do VS Code:
+
+
+# 1. Garante que você está na pasta do Módulo 3
+cd ~/Projects/data-engineering-zoomcamp/03-data-warehouse/homework
+
+# 2. Baixa um arquivo de teste via IPv4
+wget -4 https://d37ci6vzurychx.cloudfront.net/trip-data/yellow_tripdata_2024-01.parquet
+
+# 3. Verifica se ele apareceu no terminal
+ls -lh yellow_tripdata_2024-01.parquet
+
+
+Se o ls mostrar o arquivo, o problema era apenas o local do download. Se o wget travar de novo, o problema é a rede.
+
+
+
+4. Dica de Headhunter (Organização de Repo)
+
+
+Mantenha seus arquivos de dados fora das pastas de código no longo prazo. No seu README, você deve documentar que os dados são baixados via script e ignorados pelo Git.
+
+
+Para o seu Logseq:
+
+
+Fato: Volumes de Docker (Postgres) aparecem como 'Permission Denied' no host Linux.
+
+Solução: Ignorar esses diretórios em buscas de arquivos ou usar sudo se realmente precisar olhar lá dentro (não recomendado).
+
+
+
+O que fazer agora: Tente o passo 3 acima. Se o arquivo aparecer com o ls, você pode rodar o upload para o GCS: gcloud storage cp yellow_tripdata_2024-01.parquet gs://eng-district-485200-n2-terra-bucket/
+
+
+Conseguiu baixar esse único arquivo de teste na pasta homework?",
+"muito estranho ele diz que está no diretório homework e vou la'e nada ... ou é bruxaria ou é erro de permissão , só ppode ser veja pejo a copia aqui
+
+
+╭─░▒▓    ~/Projects/data-engineering-zoomcamp    main !2 ?12 ··································· 1 ✘ ▓▒░─╮
+
+
+╰─ find ~ -name 'yellow_tripdata_2024-01.parquet' 2>/dev/null                                                   ─╯
+
+
+/home/michael/data-engineering-zoomcamp/03-data-warehouse/homework/yellow_tripdata_2024-01.parquet
+
+
+╭─░▒▓    ~/Projects/data-engineering-zoomcamp    main !2 ?12 ··································· 1 ✘ ▓▒░─╮
+
+
+╰─ cd 03-data-warehouse/homework                                                                                ─╯
+
+
+╭─░▒▓    ~/Projects/data-engineering-zoomcamp/03-data-warehouse/homework    main !2 ?12 ·········· ✔ ▓▒░─╮
+
+
+╰─ ls                                                                                                           ─╯
+
+
+╭─░▒▓    ~/Projects/data-engineering-zoomcamp/03-data-warehouse/homework    main !2 ?12 ·········· ✔ ▓▒░─╮
+
+
+╰─                                                                                                              ─╯","Não é bruxaria, é um clássico caso de Links Simbólicos ou Case Sensitivity no Linux. O seu comando find encontrou o arquivo em: /home/michael/data-engineering-zoomcamp/...
+
+
+Mas o seu terminal mostra que você está em: ~/Projects/data-engineering-zoomcamp/...
+
+
+1. O Diagnóstico (Software Engineer)
+
+
+No Linux Mint, ~/Projects pode ser um link simbólico (atalho) para outra pasta, ou você tem duas pastas com nomes quase idênticos (ex: uma começando com maiúscula e outra não). O ls retorna vazio porque, para o sistema, você está em uma 'ramificação' diferente da que o find mapeou.
+
+
+2. A Solução 'Corta-Caminho' (ENTJ - Direto ao Ponto)
+
+
+Vamos usar o caminho absoluto que o find nos deu para mover os arquivos para onde o seu VS Code está olhando.
+
+
+Execute este comando (copie e cole exatamente):
+
+
+# Força a movimentação do arquivo do caminho que o find achou para a sua pasta atual
+mv /home/michael/data-engineering-zoomcamp/03-data-warehouse/homework/*.parquet .
+
+
+Depois rode:
+
+
+ls -lh
+
+
+
+3. Por que o find vê e o ls não? (Professor)
+
+
+Isso acontece geralmente por dois motivos:
+
+
+Caminhos Duplicados: Você pode ter clonado o repo em ~/Projects/ e também ter uma pasta solta em ~/data-engineering-zoomcamp/. O find ~ varre tudo e achou na segunda.
+
+Inconsistência de Shell: O Zsh com Powerlevel10k (seu tema bonitão) às vezes abrevia caminhos, o que mascara onde você realmente está.
+
+
+
+4. Upload para o GCS (Data Engineer)
+
+
+Assim que o ls mostrar os arquivos, não perca mais tempo com a localização. Execute o upload:
+
+
+gcloud storage cp *.parquet gs://eng-district-485200-n2-terra-bucket/
+
+
+5. Documentação de 'Ghost Files' (Headhunter/RH)
+
+
+No seu Logseq, registre isso como:
+
+
+Incidente: Arquivos visíveis via find mas invisíveis via ls.
+
+Causa: Discrepância de caminhos absolutos vs. relativos no ambiente local.
+
+Resolução: Uso de mv com caminho absoluto para centralizar os dados no diretório de trabalho do projeto.
+
+
+
+O que fazer agora: Execute o mv acima. Se o ls continuar vazio, use o comando ls -la (o -a mostra arquivos ocultos, vai que eles estão com um . na frente por erro do script).
+
+
+Conseguiu mover os arquivos? Se sim, o Bucket te espera.",
+"aqui no script vi agora que esqueci de colocar a pasta /projects/ ... já copiei e vou atualizar o script também...","Perfeito. Esse é o 'erro clássico' de quem trabalha com automação: o script faz exatamente o que você mandou, não o que você pensou. Se o script rodou em /home/michael/data-engineering-zoomcamp e seu projeto está em /home/michael/Projects/data-engineering-zoomcamp, você criou uma estrutura fantasma.
+
+
+1. Ação Corretiva (ENTJ - Papo Reto)
+
+
+Já que você identificou o erro no path do script, faça a limpeza para não deixar lixo no seu SSD:
+
+
+Mova os arquivos para o lugar certo (você já deve ter feito, mas garanta):
+mv /home/michael/data-engineering-zoomcamp/03-data-warehouse/homework/*.parquet ~/Projects/data-engineering-zoomcamp/03-data-warehouse/homework/
+
+Delete a pasta fantasma (Cuidado! Verifique se não tem nada importante lá antes):
+rm -rf /home/michael/data-engineering-zoomcamp
+
+
+
+2. Ajuste do Script (Role: Software Engineer)
+
+
+Para evitar que isso ocorra novamente, use variáveis de ambiente ou caminhos relativos ao local do script.
+
+
+Sugestão de melhoria para o seu script:
+
+
+#!/usr/bin/env zsh
+# Pega o diretório onde o script está salvo, não importa de onde você o chame
+SCRIPT_DIR=${0:a:h}
+cd '$SCRIPT_DIR'
+
+URL_BASE='https://d37ci6vzurychx.cloudfront.net/trip-data'
+BUCKET='gs://eng-district-485200-n2-terra-bucket'
+
+for month in {01..06}; do
+  wget -4 -N '${URL_BASE}/yellow_tripdata_2024-${month}.parquet'
+done
+
+gcloud storage cp *.parquet ${BUCKET}/
+
+
+
+3. BigQuery: O Próximo Passo (Role: Senior Data Engineer)
+
+
+Agora que os arquivos estão aparecendo no ls dentro da pasta certa, execute o upload para o GCS. Assim que terminar, você precisa criar o Dataset no BigQuery (se ainda não existir).
+
+
+Comando rápido via Terminal (bq cli):
+
+
+bq mk --location=US zoomcamp
+
+
+(Se preferir outro nome de dataset ou outra região, ajuste aqui).
+
+
+
+4. Visão de RH/Headhunter
+
+
+No seu GitHub, quando você documentar essa fase, mencione que utilizou Shell Scripting para automação de download e Google Cloud SDK para ingestão.
+
+'Automatizei a ingestão de dados brutos (Parquet) de 2024 para o GCS, garantindo a integridade dos caminhos de diretórios no Linux Mint e otimizando o transporte via CLI.'
+
+Isso mostra que você domina o ambiente local e a nuvem.
+
+
+
+O que fazer agora:
+
+
+Termine o upload: gcloud storage cp *.parquet gs://eng-district-485200-n2-terra-bucket/.
+
+Confirme se os arquivos chegaram na nuvem: gcloud storage ls gs://eng-district-485200-n2-terra-bucket/.
+
+Me avise quando estiver pronto para as queries SQL do Homework.
+
+
+Quer que eu já prepare o SQL para a Questão 1 (contagem de registros) para você testar assim que o upload acabar?",
+
+# Powered by Gemini Exporter (https://www.ai-chat-exporter.com)
