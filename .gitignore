@@ -223,3 +223,16 @@ ny_taxi_db_data/
 
 # Local parquet files
 *.parquet
+
+# Chat with Gemini for project
+Gemini*.txt
+
+# DuckDB
+*.duckdb
+*.db 
+
+.bruin.yml
+logs/runs
+logs/*.log
+*.py[cod]
+logs/queries
